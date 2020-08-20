@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/realtime"
+        android:icon="@drawable/no_data_img"
+        android:title="@string/realtime" />
+
+    <item android:id="@+id/single_update"
+        android:icon="@drawable/wrong_img"
+        android:title="@string/single_update" />
+
+</menu>
