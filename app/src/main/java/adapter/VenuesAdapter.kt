@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import api.ApiDelegate
+import api.ApiRequests
 import com.facebook.drawee.view.SimpleDraweeView
 import com.google.android.material.textview.MaterialTextView
 import com.ihsib.nearby.R
 import model.Venue.VenueItemModel
+import model.photo.PhotoModel
 import java.util.*
 
 /**
@@ -50,22 +53,21 @@ class VenuesAdapter(
 
         //Todo uncomment this lines of code to stay under limit api request.
 
-//        ApiRequests().getPhoto(context, venue.venue.id, object : ApiDelegate.PhotoDelegate {
-//            override fun onRequestCompleted(
-//                status: Boolean,
-//                photoModel: PhotoModel?,
-//                error: String
-//            ) {
-//                if(status){
-//                    if(photoModel?.response?.photos?.items?.size!! > 0){
-//                        val item  = photoModel.response.photos.items.get(0);
-//                        val imageUrl = item.prefix + "100x70" + item.suffix
-//                        holder.iv_venue.setImageURI(imageUrl)
-//                    }
-//                }
-//            }
-//
-//        })
+        ApiRequests().getPhoto(context, venue.venue.id, object : ApiDelegate.PhotoDelegate {
+            override fun onRequestCompleted(
+                status: Boolean,
+                photoModel: PhotoModel?,
+                error: String
+            ) {
+                if(status){
+                    if(photoModel?.response?.photos?.items?.size!! > 0){
+                        val item  = photoModel.response.photos.items.get(0);
+                        val imageUrl = item.prefix + "100x70" + item.suffix
+                        holder.iv_venue.setImageURI(imageUrl)
+                    }
+                }
+            }
+        })
 
         holder.tv_venue_name.text = venue.venue.name;
         holder.tv_venue_adress.text =
